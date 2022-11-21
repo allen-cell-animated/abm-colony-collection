@@ -5,3 +5,11 @@ abm\_colony\_collection package
    :members:
    :undoc-members:
    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   abm_colony_collection.neighbor

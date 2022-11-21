@@ -1,0 +1,17 @@
+abm\_colony\_collection.neighbor package
+========================================
+
+.. automodule:: abm_colony_collection.neighbor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   abm_colony_collection.neighbor.get_depth_map
+   abm_colony_collection.neighbor.get_neighbors_map
+   abm_colony_collection.neighbor.make_voxels_array
