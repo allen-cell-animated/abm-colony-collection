@@ -1,0 +1,7 @@
+abm\_colony\_collection package
+===============================
+
+.. automodule:: abm_colony_collection
+   :members:
+   :undoc-members:
+   :show-inheritance:
