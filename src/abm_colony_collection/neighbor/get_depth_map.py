@@ -5,7 +5,7 @@ from scipy import ndimage
 
 
 @task
-def get_depth_map(array, neighbors_map):
+def get_depth_map(array: np.ndarray, neighbors_map: dict) -> dict:
     depth_map = {cell_id: 0 for cell_id in np.unique(array)}
     depth_map.pop(0, None)
 
@@ -29,7 +29,7 @@ def get_depth_map(array, neighbors_map):
     return depth_map
 
 
-def find_edge_ids(array):
+def find_edge_ids(array: np.ndarray) -> list[int]:
     slice_index = np.argmax(np.count_nonzero(array, axis=(1, 2)))
     array_slice = array[slice_index, :, :]
 

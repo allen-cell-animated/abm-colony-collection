@@ -5,8 +5,8 @@ import numpy as np
 @task
 def make_voxels_array(locations: dict) -> np.ndarray:
     # Extract all voxel positions with id.
-    all_ids = []
-    all_xyz = []
+    all_ids: list[int] = []
+    all_xyz: list[tuple[int, int, int]] = []
     for location in locations:
         cell_id = location["id"]
         xyz = [(x, y, z) for region in location["location"] for x, y, z in region["voxels"]]

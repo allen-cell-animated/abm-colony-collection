@@ -1,3 +1,5 @@
+from typing import Optional
+
 from prefect import task
 import numpy as np
 from skimage import measure
@@ -5,8 +7,8 @@ from scipy import ndimage
 
 
 @task
-def get_neighbors_map(array):
-    neighbors_map = {cell_id: {} for cell_id in np.unique(array)}
+def get_neighbors_map(array: np.ndarray) -> dict:
+    neighbors_map: dict = {cell_id: {} for cell_id in np.unique(array)}
     neighbors_map.pop(0, None)
 
     # Create binary mask for array.
@@ -20,7 +22,7 @@ def get_neighbors_map(array):
     voxel_filter = lambda voxel_id: lambda v: voxel_id in v
 
     for group in range(1, groups + 1):
-        group_crop = get_cropped_array(array, labels, group)
+        group_crop = get_cropped_array(array, group, labels)
         voxel_ids = [i for i in np.unique(group_crop) if i != 0]
 
         # Find neighbors for each voxel id.
@@ -38,7 +40,7 @@ def get_neighbors_map(array):
     return neighbors_map
 
 
-def get_bounding_box(array):
+def get_bounding_box(array: np.ndarray) -> tuple[int, int, int, int, int, int]:
     """Finds bounding box around binary array."""
     x, y, z = array.shape
 
@@ -62,11 +64,13 @@ def get_bounding_box(array):
     return xmin, xmax, ymin, ymax, zmin, zmax
 
 
-def get_cropped_array(array, label, labels=None, crop_original=False):
+def get_cropped_array(
+    array: np.ndarray, label: int, labels: Optional[np.ndarray] = None, crop_original: bool = False
+) -> np.ndarray:
     # Set all voxels not matching label to zero.
     array_mask = array.copy()
-    labels = labels if labels else array_mask
-    array_mask[labels != label] = 0
+    array_filter = labels if labels is not None else array_mask
+    array_mask[array_filter != label] = 0
 
     # Crop array to label.
     xmin, xmax, ymin, ymax, zmin, zmax = get_bounding_box(array_mask)
