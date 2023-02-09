@@ -1,9 +1,9 @@
 from typing import Optional
 
-from prefect import task
 import numpy as np
-from skimage import measure
+from prefect import task
 from scipy import ndimage
+from skimage import measure
 
 
 @task
