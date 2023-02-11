@@ -33,8 +33,11 @@ def calculate_cluster_distances(neighbors: pd.DataFrame) -> pd.DataFrame:
     return all_clusters_df
 
 
-def calculate_inter_cluster_distances(clusters: pd.DataFrame) -> pd.DataFrame:
+def calculate_inter_cluster_distances(clusters: pd.DataFrame) -> tuple[float, float]:
     cluster_centroids = clusters.groupby("GROUP")[["cx", "cy", "cz"]].mean().values
+
+    if cluster_centroids.shape[0] < 2:
+        return (np.nan, np.nan)
 
     inter_distances = distance.cdist(cluster_centroids, cluster_centroids, "euclidean")
     distances = np.ndarray.flatten(inter_distances)
@@ -46,7 +49,7 @@ def calculate_inter_cluster_distances(clusters: pd.DataFrame) -> pd.DataFrame:
     return (inter_distance_mean, inter_distance_std)
 
 
-def calculate_intra_cluster_distances(clusters: pd.DataFrame) -> pd.DataFrame:
+def calculate_intra_cluster_distances(clusters: pd.DataFrame) -> tuple[float, float]:
     intra_distance_means = []
     intra_distance_stds = []
 
