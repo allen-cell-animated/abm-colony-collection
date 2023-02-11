@@ -1,7 +1,0 @@
-abm\_colony\_collection.neighbor.make\_voxels\_array module
-===========================================================
-
-.. automodule:: abm_colony_collection.neighbor.make_voxels_array
-   :members:
-   :undoc-members:
-   :show-inheritance:
