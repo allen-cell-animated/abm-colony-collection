@@ -21,6 +21,8 @@ Submodules
    :maxdepth: 4
 
    abm_colony_collection.calculate_centrality_measures
+   abm_colony_collection.calculate_cluster_distances
+   abm_colony_collection.calculate_cluster_sizes
    abm_colony_collection.calculate_degree_measures
    abm_colony_collection.calculate_distance_measures
    abm_colony_collection.convert_to_network
