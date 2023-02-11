@@ -1,4 +1,6 @@
 from .calculate_centrality_measures import calculate_centrality_measures
+from .calculate_cluster_distances import calculate_cluster_distances
+from .calculate_cluster_sizes import calculate_cluster_sizes
 from .calculate_degree_measures import calculate_degree_measures
 from .calculate_distance_measures import calculate_distance_measures
 from .convert_to_network import convert_to_network
