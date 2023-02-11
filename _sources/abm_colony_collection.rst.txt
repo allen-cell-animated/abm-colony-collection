@@ -13,3 +13,14 @@ Subpackages
    :maxdepth: 4
 
    abm_colony_collection.neighbor
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   abm_colony_collection.calculate_centrality_measures
+   abm_colony_collection.calculate_degree_measures
+   abm_colony_collection.calculate_distance_measures
+   abm_colony_collection.convert_to_network

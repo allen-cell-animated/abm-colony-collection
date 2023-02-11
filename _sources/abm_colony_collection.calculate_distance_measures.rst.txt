@@ -1,0 +1,7 @@
+abm\_colony\_collection.calculate\_distance\_measures module
+============================================================
+
+.. automodule:: abm_colony_collection.calculate_distance_measures
+   :members:
+   :undoc-members:
+   :show-inheritance:

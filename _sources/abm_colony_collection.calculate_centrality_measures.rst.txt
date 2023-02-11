@@ -1,0 +1,7 @@
+abm\_colony\_collection.calculate\_centrality\_measures module
+==============================================================
+
+.. automodule:: abm_colony_collection.calculate_centrality_measures
+   :members:
+   :undoc-members:
+   :show-inheritance:
