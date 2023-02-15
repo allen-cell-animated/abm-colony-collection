@@ -3,7 +3,7 @@ from prefect import task
 
 
 @task
-def make_voxels_array(locations: dict) -> np.ndarray:
+def make_voxels_array(locations: list) -> np.ndarray:
     # Extract all voxel positions with id.
     all_ids: list[int] = []
     all_xyz: list[tuple[int, int, int]] = []
