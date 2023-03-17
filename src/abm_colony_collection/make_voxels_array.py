@@ -1,8 +1,6 @@
 import numpy as np
-from prefect import task
 
 
-@task
 def make_voxels_array(locations: list) -> np.ndarray:
     # Extract all voxel positions with id.
     all_ids: list[int] = []

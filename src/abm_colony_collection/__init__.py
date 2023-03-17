@@ -1,9 +1,14 @@
-from .calculate_centrality_measures import calculate_centrality_measures
-from .calculate_cluster_distances import calculate_cluster_distances
-from .calculate_cluster_sizes import calculate_cluster_sizes
-from .calculate_degree_measures import calculate_degree_measures
-from .calculate_distance_measures import calculate_distance_measures
-from .convert_to_network import convert_to_network
-from .get_depth_map import get_depth_map
-from .get_neighbors_map import get_neighbors_map
-from .make_voxels_array import make_voxels_array
+import importlib
+import os
+import sys
+
+from prefect import task
+
+for module_file in os.listdir(os.path.dirname(__file__)):
+    if module_file == "__init__.py" or not module_file.endswith(".py"):
+        continue
+
+    module_name = module_file.replace(".py", "")
+
+    module = importlib.import_module(f".{module_name}", package=__name__)
+    setattr(sys.modules[__name__], module_name, task(getattr(module, module_name)))

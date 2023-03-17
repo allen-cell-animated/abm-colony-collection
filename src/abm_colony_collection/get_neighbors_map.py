@@ -1,12 +1,10 @@
 from typing import Optional
 
 import numpy as np
-from prefect import task
 from scipy import ndimage
 from skimage import measure
 
 
-@task
 def get_neighbors_map(array: np.ndarray) -> dict:
     neighbors_map: dict = {cell_id: {} for cell_id in np.unique(array)}
     neighbors_map.pop(0, None)
