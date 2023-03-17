@@ -1,10 +1,8 @@
 import numpy as np
 import pandas as pd
-from prefect import task
 from scipy.spatial import distance
 
 
-@task
 def calculate_cluster_distances(neighbors: pd.DataFrame) -> pd.DataFrame:
     all_clusters = []
 

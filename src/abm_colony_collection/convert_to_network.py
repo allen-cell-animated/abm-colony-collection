@@ -1,9 +1,7 @@
 import networkx as nx
 import pandas as pd
-from prefect import task
 
 
-@task
 def convert_to_network(neighbors: pd.DataFrame) -> nx.Graph:
     networks = {}
 

@@ -1,10 +1,8 @@
 import numpy as np
-from prefect import task
 from scipy import ndimage
 from skimage import measure
 
 
-@task
 def get_depth_map(array: np.ndarray, neighbors_map: dict) -> dict:
     depth_map = {cell_id: 0 for cell_id in np.unique(array)}
     depth_map.pop(0, None)
