@@ -2,7 +2,7 @@
 
 > Compare with [v0.2.1](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.2.1...v0.2.2)
 
-### Features
+### Admin
 
 - Upgrade prefect and update dependencies by [@jessicasyu](https://github.com/jessicasyu) in [#10](https://github.com/allen-cell-animated/abm-colony-collection/pull/10)
 
@@ -10,7 +10,7 @@
 
 > Compare with [v0.2.0](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.2.0...v0.2.1)
 
-### Bug fixes
+### Documentation
 
 - Fix type hints by [@jessicasyu](https://github.com/jessicasyu) in [#8](https://github.com/allen-cell-animated/abm-colony-collection/pull/8)
 
@@ -23,7 +23,7 @@
 - Add network tasks by [@jessicasyu](https://github.com/jessicasyu) in [#4](https://github.com/allen-cell-animated/abm-colony-collection/pull/4)
 - Add cluster tasks by [@jessicasyu](https://github.com/jessicasyu) in [#5](https://github.com/allen-cell-animated/abm-colony-collection/pull/5)
 
-### Bug fixes
+### Admin
 
 - Update import sorting for all tasks by [@jessicasyu](https://github.com/jessicasyu) in [#3](https://github.com/allen-cell-animated/abm-colony-collection/pull/3)
 - Move neighbors tasks to top level by [@jessicasyu](https://github.com/jessicasyu) in [#6](https://github.com/allen-cell-animated/abm-colony-collection/pull/6)
