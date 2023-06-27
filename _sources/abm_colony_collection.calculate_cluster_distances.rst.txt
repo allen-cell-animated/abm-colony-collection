@@ -1,7 +1,0 @@
-abm\_colony\_collection.calculate\_cluster\_distances module
-============================================================
-
-.. automodule:: abm_colony_collection.calculate_cluster_distances
-   :members:
-   :undoc-members:
-   :show-inheritance:

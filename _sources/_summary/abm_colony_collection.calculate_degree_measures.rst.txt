@@ -1,0 +1,22 @@
+calculate\_degree\_measures
+===========================
+
+.. automodule:: abm_colony_collection.calculate_degree_measures
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

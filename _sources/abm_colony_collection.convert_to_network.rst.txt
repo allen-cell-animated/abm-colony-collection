@@ -1,7 +1,0 @@
-abm\_colony\_collection.convert\_to\_network module
-===================================================
-
-.. automodule:: abm_colony_collection.convert_to_network
-   :members:
-   :undoc-members:
-   :show-inheritance:

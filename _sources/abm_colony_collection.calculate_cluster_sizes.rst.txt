@@ -1,7 +1,0 @@
-abm\_colony\_collection.calculate\_cluster\_sizes module
-========================================================
-
-.. automodule:: abm_colony_collection.calculate_cluster_sizes
-   :members:
-   :undoc-members:
-   :show-inheritance:

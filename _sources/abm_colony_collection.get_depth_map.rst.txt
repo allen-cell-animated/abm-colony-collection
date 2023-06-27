@@ -1,7 +1,0 @@
-abm\_colony\_collection.get\_depth\_map module
-==============================================
-
-.. automodule:: abm_colony_collection.get_depth_map
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,0 +1,22 @@
+get\_neighbors\_map
+===================
+
+.. automodule:: abm_colony_collection.get_neighbors_map
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

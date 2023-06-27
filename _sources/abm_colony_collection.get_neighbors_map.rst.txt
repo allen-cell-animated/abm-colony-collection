@@ -1,7 +1,0 @@
-abm\_colony\_collection.get\_neighbors\_map module
-==================================================
-
-.. automodule:: abm_colony_collection.get_neighbors_map
-   :members:
-   :undoc-members:
-   :show-inheritance:
