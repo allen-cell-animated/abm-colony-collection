@@ -2,8 +2,8 @@ calculate\_cluster\_sizes
 =========================
 
 .. automodule:: abm_colony_collection.calculate_cluster_sizes
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    

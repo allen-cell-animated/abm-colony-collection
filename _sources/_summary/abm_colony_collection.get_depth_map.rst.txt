@@ -2,8 +2,8 @@ get\_depth\_map
 ===============
 
 .. automodule:: abm_colony_collection.get_depth_map
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    

@@ -2,8 +2,8 @@ calculate\_distance\_measures
 =============================
 
 .. automodule:: abm_colony_collection.calculate_distance_measures
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    
