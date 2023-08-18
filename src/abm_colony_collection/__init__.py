@@ -1,3 +1,5 @@
+"""Tasks for analyzing colony dynamics including clustering and graph measures."""
+
 from prefect import task
 
 from .calculate_centrality_measures import calculate_centrality_measures
