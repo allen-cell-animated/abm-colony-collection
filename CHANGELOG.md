@@ -1,3 +1,15 @@
+# [v0.3.4](https://github.com/allen-cell-animated/abm-colony-collection/releases/tag/v0.3.4) - 2023-08-18
+
+> Compare with [v0.3.3](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.3.3...v0.3.4)
+
+### Documentation
+
+- Add module docstrings by [@jessicasyu](https://github.com/jessicasyu) in [#26](https://github.com/allen-cell-animated/abm-colony-collection/pull/26)
+
+### Admin
+
+- Update workflow permissions and badges by [@jessicasyu](https://github.com/jessicasyu) in [#27](https://github.com/allen-cell-animated/abm-colony-collection/pull/27)
+
 # [v0.3.3](https://github.com/allen-cell-animated/abm-colony-collection/releases/tag/v0.3.3) - 2023-06-29
 
 > Compare with [v0.3.2](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.3.2...v0.3.3)
