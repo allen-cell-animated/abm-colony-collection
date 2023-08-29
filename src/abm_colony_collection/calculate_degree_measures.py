@@ -1,25 +1,16 @@
-import numpy as np
+import networkx as nx
 import pandas as pd
 
 
-def calculate_degree_measures(networks: dict) -> pd.DataFrame:
-    all_measures = []
+def calculate_degree_measures(network: nx.Graph) -> pd.DataFrame:
+    measures = [
+        {
+            "ID": node,
+            "DEGREE": degree,
+        }
+        for node, degree in network.degree()
+    ]
 
-    for (seed, tick), network in networks.items():
-        degrees = sorted([d for n, d in network.degree()], reverse=True)
-        degree_mean = np.mean(degrees)
-        degree_std = np.std(degrees, ddof=1)
+    measures_df = pd.DataFrame(measures)
 
-        all_measures.append(
-            {
-                "SEED": seed,
-                "TICK": tick,
-                "DEGREES": degrees,
-                "DEGREE_MEAN": degree_mean,
-                "DEGREE_STD": degree_std,
-            }
-        )
-
-    all_measures_df = pd.DataFrame(all_measures)
-
-    return all_measures_df
+    return measures_df

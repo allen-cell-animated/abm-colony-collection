@@ -1,47 +1,23 @@
+from typing import Union
+
 import networkx as nx
-import numpy as np
 import pandas as pd
 
 
-def calculate_distance_measures(networks: dict) -> pd.DataFrame:
-    all_measures = []
+def calculate_distance_measures(network: nx.Graph) -> pd.DataFrame:
+    measures: list[dict[str, Union[int, float]]] = []
 
-    for (seed, tick), network in networks.items():
-        if not nx.is_connected(network):
-            subnetworks = [
-                network.subgraph(component) for component in nx.connected_components(network)
-            ]
+    for component in nx.connected_components(network):
+        eccentricity = nx.eccentricity(network.subgraph(component))
 
-            radius = np.mean([nx.radius(subnetwork) for subnetwork in subnetworks])
-            diameter = np.mean([nx.diameter(subnetwork) for subnetwork in subnetworks])
-
-            eccentricities = [nx.eccentricity(subnetwork) for subnetwork in subnetworks]
-            eccentricity = np.mean([np.mean(list(ecc.values())) for ecc in eccentricities])
-
-            shortest_paths = [
-                nx.average_shortest_path_length(subnetwork) for subnetwork in subnetworks
-            ]
-            shortest_path = np.mean(shortest_paths)
-        else:
-            radius = nx.radius(network)
-            diameter = nx.diameter(network)
-
-            ecc = nx.eccentricity(network)
-            eccentricity = np.mean(list(ecc.values()))
-
-            shortest_path = nx.average_shortest_path_length(network)
-
-        all_measures.append(
+        measures = measures + [
             {
-                "SEED": seed,
-                "TICK": tick,
-                "RADIUS": radius,
-                "DIAMETER": diameter,
-                "ECCENTRICITY": eccentricity,
-                "SHORTEST_PATH": shortest_path,
+                "ID": node,
+                "ECCENTRICITY": eccentricity[node],
             }
-        )
+            for node in component
+        ]
 
-    all_measures_df = pd.DataFrame(all_measures)
+    measures_df = pd.DataFrame(measures)
 
-    return all_measures_df
+    return measures_df
