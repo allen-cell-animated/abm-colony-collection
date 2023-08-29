@@ -3,20 +3,15 @@ import pandas as pd
 
 
 def convert_to_network(neighbors: pd.DataFrame) -> nx.Graph:
-    networks = {}
+    nodes = list(neighbors["ID"].values)
+    edges = [
+        (node_id, neighbor_id)
+        for node_id, neighbor_ids in zip(neighbors["ID"], neighbors["NEIGHBORS"])
+        for neighbor_id in neighbor_ids
+    ]
 
-    for tick, group in neighbors.groupby("TICK"):
-        nodes = list(group["ID"].values)
-        edges = [
-            (node_id, neighbor_id)
-            for node_id, neighbor_ids in zip(group["ID"], group["NEIGHBORS"])
-            for neighbor_id in neighbor_ids
-        ]
+    network = nx.Graph()
+    network.add_nodes_from(nodes)
+    network.add_edges_from(edges)
 
-        network = nx.Graph()
-        network.add_nodes_from(nodes)
-        network.add_edges_from(edges)
-
-        networks[tick] = network
-
-    return networks
+    return network
