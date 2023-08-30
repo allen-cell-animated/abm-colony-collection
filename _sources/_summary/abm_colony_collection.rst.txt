@@ -32,8 +32,6 @@
    :recursive:
 
    calculate_centrality_measures
-   calculate_cluster_distances
-   calculate_cluster_sizes
    calculate_degree_measures
    calculate_distance_measures
    convert_to_network

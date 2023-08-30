@@ -158,8 +158,6 @@
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../_summary/abm_colony_collection.html">abm_colony_collection</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of abm_colony_collection</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../_summary/abm_colony_collection.calculate_centrality_measures.html">calculate_centrality_measures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../_summary/abm_colony_collection.calculate_cluster_distances.html">calculate_cluster_distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../_summary/abm_colony_collection.calculate_cluster_sizes.html">calculate_cluster_sizes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_summary/abm_colony_collection.calculate_degree_measures.html">calculate_degree_measures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_summary/abm_colony_collection.calculate_distance_measures.html">calculate_distance_measures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_summary/abm_colony_collection.convert_to_network.html">convert_to_network</a></li>
@@ -211,31 +209,21 @@
         </div>
         <article role="main">
           <h1>Source code for abm_colony_collection.calculate_degree_measures</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
-<div class="viewcode-block" id="calculate_degree_measures"><a class="viewcode-back" href="../../_summary/abm_colony_collection.calculate_degree_measures.html#abm_colony_collection.calculate_degree_measures.calculate_degree_measures">[docs]</a><span class="k">def</span> <span class="nf">calculate_degree_measures</span><span class="p">(</span><span class="n">networks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">all_measures</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="viewcode-block" id="calculate_degree_measures"><a class="viewcode-back" href="../../_summary/abm_colony_collection.calculate_degree_measures.html#abm_colony_collection.calculate_degree_measures.calculate_degree_measures">[docs]</a><span class="k">def</span> <span class="nf">calculate_degree_measures</span><span class="p">(</span><span class="n">network</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="c1"># Extract degree for each node in network.</span>
+    <span class="n">measures</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="n">node</span><span class="p">,</span>
+            <span class="s2">&quot;DEGREE&quot;</span><span class="p">:</span> <span class="n">degree</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">network</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
+    <span class="p">]</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">tick</span><span class="p">),</span> <span class="n">network</span> <span class="ow">in</span> <span class="n">networks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">degrees</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">d</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">network</span><span class="o">.</span><span class="n">degree</span><span class="p">()],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">degree_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
-        <span class="n">degree_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-        <span class="n">all_measures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;SEED&quot;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
-                <span class="s2">&quot;TICK&quot;</span><span class="p">:</span> <span class="n">tick</span><span class="p">,</span>
-                <span class="s2">&quot;DEGREES&quot;</span><span class="p">:</span> <span class="n">degrees</span><span class="p">,</span>
-                <span class="s2">&quot;DEGREE_MEAN&quot;</span><span class="p">:</span> <span class="n">degree_mean</span><span class="p">,</span>
-                <span class="s2">&quot;DEGREE_STD&quot;</span><span class="p">:</span> <span class="n">degree_std</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-
-    <span class="n">all_measures_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_measures</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">all_measures_df</span></div>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">measures</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>
