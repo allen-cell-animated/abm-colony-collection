@@ -3,6 +3,7 @@ import pandas as pd
 
 
 def calculate_degree_measures(network: nx.Graph) -> pd.DataFrame:
+    # Extract degree for each node in network.
     measures = [
         {
             "ID": node,
@@ -11,6 +12,4 @@ def calculate_degree_measures(network: nx.Graph) -> pd.DataFrame:
         for node, degree in network.degree()
     ]
 
-    measures_df = pd.DataFrame(measures)
-
-    return measures_df
+    return pd.DataFrame(measures)

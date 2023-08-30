@@ -3,10 +3,12 @@ import pandas as pd
 
 
 def calculate_centrality_measures(network: nx.Graph) -> pd.DataFrame:
+    # Calculate different centrality measures for network.
     degree_centralities = nx.degree_centrality(network)
     closeness_centralities = nx.closeness_centrality(network)
     betweenness_centralities = nx.betweenness_centrality(network)
 
+    # Extract centrality measures for each node in network.
     measures = [
         {
             "ID": node,
@@ -17,6 +19,4 @@ def calculate_centrality_measures(network: nx.Graph) -> pd.DataFrame:
         for node in network.nodes
     ]
 
-    measures_df = pd.DataFrame(measures)
-
-    return measures_df
+    return pd.DataFrame(measures)

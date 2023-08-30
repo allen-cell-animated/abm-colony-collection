@@ -8,8 +8,10 @@ def calculate_distance_measures(network: nx.Graph) -> pd.DataFrame:
     measures: list[dict[str, Union[int, float]]] = []
 
     for component in nx.connected_components(network):
+        # Calculate eccentricity for connected subnetwork.
         eccentricity = nx.eccentricity(network.subgraph(component))
 
+        # Extract distance measures for each node in subnetwork.
         measures = measures + [
             {
                 "ID": node,
@@ -18,6 +20,4 @@ def calculate_distance_measures(network: nx.Graph) -> pd.DataFrame:
             for node in component
         ]
 
-    measures_df = pd.DataFrame(measures)
-
-    return measures_df
+    return pd.DataFrame(measures)
