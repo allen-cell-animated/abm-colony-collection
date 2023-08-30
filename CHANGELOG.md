@@ -1,3 +1,11 @@
+# [v0.4.0](https://github.com/allen-cell-animated/abm-colony-collection/releases/tag/v0.4.0) - 2023-08-30
+
+> Compare with [v0.3.4](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.3.4...v0.4.0)
+
+### Features
+
+- Refactor calculate tasks by [@jessicasyu](https://github.com/jessicasyu) in [#29](https://github.com/allen-cell-animated/abm-colony-collection/pull/29)
+
 # [v0.3.4](https://github.com/allen-cell-animated/abm-colony-collection/releases/tag/v0.3.4) - 2023-08-18
 
 > Compare with [v0.3.3](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.3.3...v0.3.4)
