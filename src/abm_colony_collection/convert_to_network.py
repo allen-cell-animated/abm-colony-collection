@@ -3,6 +3,20 @@ import pandas as pd
 
 
 def convert_to_network(neighbors: pd.DataFrame) -> nx.Graph:
+    """
+    Convert lists of neighbors to a network object.
+
+    Parameters
+    ----------
+    neighbors
+        Lists of neighbors for each node id.
+
+    Returns
+    -------
+    :
+        The network object.
+    """
+
     nodes = list(neighbors["ID"].values)
     edges = [
         (node_id, neighbor_id)
