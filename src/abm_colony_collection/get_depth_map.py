@@ -4,8 +4,32 @@ from skimage import measure
 
 
 def get_depth_map(array: np.ndarray, neighbors_map: dict) -> dict:
+    """
+    Get map of id to depth starting from depth = 1 at the edge if the region.
+
+    All ids at the edge of the array are assigned a depth of 1. Immediate
+    neighbors of those edges are assigned a depth of 2, and so on, until all ids
+    have an assigned depth.
+
+    Parameters
+    ----------
+    array
+        Segmentation array.
+    neighbors_map
+        Map of ids to lists of neighbors.
+
+    Returns
+    -------
+    :
+        Map of id to depth from edge.
+    """
+
     depth_map = {cell_id: 0 for cell_id in np.unique(array)}
     depth_map.pop(0, None)
+
+    # Return empty depth map if there are no cell ids in the array
+    if not depth_map:
+        return depth_map
 
     edge_ids = find_edge_ids(array)
     visited = set(edge_ids)
@@ -28,6 +52,20 @@ def get_depth_map(array: np.ndarray, neighbors_map: dict) -> dict:
 
 
 def find_edge_ids(array: np.ndarray) -> list[int]:
+    """
+    Gets ids of regions closest to the edge of the array.
+
+    Parameters
+    ----------
+    array
+        Segmentation array.
+
+    Returns
+    -------
+    :
+        List of edge arrays.
+    """
+
     slice_index = np.argmax(np.count_nonzero(array, axis=(1, 2)))
     array_slice = array[slice_index, :, :]
 
