@@ -214,6 +214,24 @@
 
 
 <div class="viewcode-block" id="calculate_degree_measures"><a class="viewcode-back" href="../../_summary/abm_colony_collection.calculate_degree_measures.html#abm_colony_collection.calculate_degree_measures.calculate_degree_measures">[docs]</a><span class="k">def</span> <span class="nf">calculate_degree_measures</span><span class="p">(</span><span class="n">network</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate degree measures for each node in network.</span>
+
+<span class="sd">    Measures include:</span>
+
+<span class="sd">    - Degree = number of edges adjacent to the node</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network</span>
+<span class="sd">        The network object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Degree measures for each node in the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># Extract degree for each node in network.</span>
     <span class="n">measures</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>

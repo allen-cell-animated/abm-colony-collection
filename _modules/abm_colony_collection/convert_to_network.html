@@ -214,6 +214,20 @@
 
 
 <div class="viewcode-block" id="convert_to_network"><a class="viewcode-back" href="../../_summary/abm_colony_collection.convert_to_network.html#abm_colony_collection.convert_to_network.convert_to_network">[docs]</a><span class="k">def</span> <span class="nf">convert_to_network</span><span class="p">(</span><span class="n">neighbors</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert lists of neighbors to a network object.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    neighbors</span>
+<span class="sd">        Lists of neighbors for each node id.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        The network object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">neighbors</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
     <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">neighbor_id</span><span class="p">)</span>

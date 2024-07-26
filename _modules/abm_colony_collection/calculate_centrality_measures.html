@@ -214,6 +214,28 @@
 
 
 <div class="viewcode-block" id="calculate_centrality_measures"><a class="viewcode-back" href="../../_summary/abm_colony_collection.calculate_centrality_measures.html#abm_colony_collection.calculate_centrality_measures.calculate_centrality_measures">[docs]</a><span class="k">def</span> <span class="nf">calculate_centrality_measures</span><span class="p">(</span><span class="n">network</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate centrality measures for each node in network.</span>
+
+<span class="sd">    Measures include:</span>
+
+<span class="sd">    - Degree centrality = quantifies how many neighbors a node has</span>
+<span class="sd">    - Closeness centrality = quantifies how close a node is to all other nodes</span>
+<span class="sd">      in the network</span>
+<span class="sd">    - Betweenness centrality = quantifies the extent to which a vertex lies on</span>
+<span class="sd">      shortest paths between other vertices</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    network</span>
+<span class="sd">        The network object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Centrality measures for each node in the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># Calculate different centrality measures for network.</span>
     <span class="n">degree_centralities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
     <span class="n">closeness_centralities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>

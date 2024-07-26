@@ -215,8 +215,32 @@
 
 
 <div class="viewcode-block" id="get_depth_map"><a class="viewcode-back" href="../../_summary/abm_colony_collection.get_depth_map.html#abm_colony_collection.get_depth_map.get_depth_map">[docs]</a><span class="k">def</span> <span class="nf">get_depth_map</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">neighbors_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get map of id to depth starting from depth = 1 at the edge if the region.</span>
+
+<span class="sd">    All ids at the edge of the array are assigned a depth of 1. Immediate</span>
+<span class="sd">    neighbors of those edges are assigned a depth of 2, and so on, until all ids</span>
+<span class="sd">    have an assigned depth.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array</span>
+<span class="sd">        Segmentation array.</span>
+<span class="sd">    neighbors_map</span>
+<span class="sd">        Map of ids to lists of neighbors.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Map of id to depth from edge.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">depth_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">cell_id</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">cell_id</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">array</span><span class="p">)}</span>
     <span class="n">depth_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Return empty depth map if there are no cell ids in the array</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">depth_map</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">depth_map</span>
 
     <span class="n">edge_ids</span> <span class="o">=</span> <span class="n">find_edge_ids</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">edge_ids</span><span class="p">)</span>
@@ -239,6 +263,20 @@
 
 
 <div class="viewcode-block" id="find_edge_ids"><a class="viewcode-back" href="../../_summary/abm_colony_collection.get_depth_map.html#abm_colony_collection.get_depth_map.find_edge_ids">[docs]</a><span class="k">def</span> <span class="nf">find_edge_ids</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets ids of regions closest to the edge of the array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array</span>
+<span class="sd">        Segmentation array.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        List of edge arrays.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">slice_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
     <span class="n">array_slice</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">slice_index</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
 

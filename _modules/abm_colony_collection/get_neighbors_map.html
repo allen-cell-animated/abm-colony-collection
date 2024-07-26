@@ -209,7 +209,7 @@
         </div>
         <article role="main">
           <h1>Source code for abm_colony_collection.get_neighbors_map</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
@@ -217,6 +217,23 @@
 
 
 <div class="viewcode-block" id="get_neighbors_map"><a class="viewcode-back" href="../../_summary/abm_colony_collection.get_neighbors_map.html#abm_colony_collection.get_neighbors_map.get_neighbors_map">[docs]</a><span class="k">def</span> <span class="nf">get_neighbors_map</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates map of region ids to lists of neighbors.</span>
+
+<span class="sd">    Each region id is also assigned a group number, where all regions in a given</span>
+<span class="sd">    group are simply connected.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array</span>
+<span class="sd">        Segmentation array.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Map of id to group and neighbor ids.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">neighbors_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">cell_id</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">cell_id</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">array</span><span class="p">)}</span>
     <span class="n">neighbors_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
@@ -227,9 +244,6 @@
     <span class="c1"># Label connected groups.</span>
     <span class="n">labels</span><span class="p">,</span> <span class="n">groups</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">return_num</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="c1"># In line function that returns a filter lambda for a given id</span>
-    <span class="n">voxel_filter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">voxel_id</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">voxel_id</span> <span class="ow">in</span> <span class="n">v</span>
-
     <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">groups</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">group_crop</span> <span class="o">=</span> <span class="n">get_cropped_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
         <span class="n">voxel_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">group_crop</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
@@ -239,7 +253,7 @@
             <span class="n">voxel_crop</span> <span class="o">=</span> <span class="n">get_cropped_array</span><span class="p">(</span><span class="n">group_crop</span><span class="p">,</span> <span class="n">voxel_id</span><span class="p">,</span> <span class="n">crop_original</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
             <span class="c1"># Apply custom filter to get border locations.</span>
-            <span class="n">border_mask</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">generic_filter</span><span class="p">(</span><span class="n">voxel_crop</span><span class="p">,</span> <span class="n">voxel_filter</span><span class="p">(</span><span class="n">voxel_id</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+            <span class="n">border_mask</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">generic_filter</span><span class="p">(</span><span class="n">voxel_crop</span><span class="p">,</span> <span class="n">_get_voxel_id_filter</span><span class="p">(</span><span class="n">voxel_id</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
             <span class="c1"># Find neighbors overlapping border.</span>
             <span class="n">neighbor_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">voxel_crop</span><span class="p">[</span><span class="n">border_mask</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
@@ -249,8 +263,28 @@
     <span class="k">return</span> <span class="n">neighbors_map</span></div>
 
 
+<span class="k">def</span> <span class="nf">_get_voxel_id_filter</span><span class="p">(</span><span class="n">voxel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create filtering lambda for given id.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">voxel_id</span> <span class="ow">in</span> <span class="n">v</span>
+
+
 <div class="viewcode-block" id="get_bounding_box"><a class="viewcode-back" href="../../_summary/abm_colony_collection.get_neighbors_map.html#abm_colony_collection.get_neighbors_map.get_bounding_box">[docs]</a><span class="k">def</span> <span class="nf">get_bounding_box</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Finds bounding box around binary array.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find bounding box around array.</span>
+
+<span class="sd">    Bounds are calculated with a one-voxel border, if possible.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array</span>
+<span class="sd">        Segmentation array.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        The bounding box (xmin, xmax, ymin, ymax, zmin, zmax) indices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span>
 
     <span class="n">xbounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -276,6 +310,26 @@
 <div class="viewcode-block" id="get_cropped_array"><a class="viewcode-back" href="../../_summary/abm_colony_collection.get_neighbors_map.html#abm_colony_collection.get_neighbors_map.get_cropped_array">[docs]</a><span class="k">def</span> <span class="nf">get_cropped_array</span><span class="p">(</span>
     <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">crop_original</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop array around label region.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array</span>
+<span class="sd">        Array to crop.</span>
+<span class="sd">    label</span>
+<span class="sd">        Region label.</span>
+<span class="sd">    labels</span>
+<span class="sd">        Array of all region labels.</span>
+<span class="sd">    crop_original</span>
+<span class="sd">        True to crop the original array keeping all labels, False otherwise.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Cropped array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># Set all voxels not matching label to zero.</span>
     <span class="n">array_mask</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">array_filter</span> <span class="o">=</span> <span class="n">labels</span> <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">array_mask</span>

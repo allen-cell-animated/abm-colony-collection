@@ -215,18 +215,52 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="abm_colony_collection.get_neighbors_map.get_neighbors_map">
 <span class="sig-name descname"><span class="pre">get_neighbors_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/abm_colony_collection/get_neighbors_map.html#get_neighbors_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#abm_colony_collection.get_neighbors_map.get_neighbors_map" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Creates map of region ids to lists of neighbors.</p>
+<p>Each region id is also assigned a group number, where all regions in a given
+group are simply connected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> – Segmentation array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Map of id to group and neighbor ids.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="abm_colony_collection.get_neighbors_map.get_bounding_box">
 <span class="sig-name descname"><span class="pre">get_bounding_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/abm_colony_collection/get_neighbors_map.html#get_bounding_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#abm_colony_collection.get_neighbors_map.get_bounding_box" title="Permalink to this definition">#</a></dt>
-<dd><p>Finds bounding box around binary array.</p>
+<dd><p>Find bounding box around array.</p>
+<p>Bounds are calculated with a one-voxel border, if possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> – Segmentation array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The bounding box (xmin, xmax, ymin, ymax, zmin, zmax) indices</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="abm_colony_collection.get_neighbors_map.get_cropped_array">
 <span class="sig-name descname"><span class="pre">get_cropped_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_original</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/abm_colony_collection/get_neighbors_map.html#get_cropped_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#abm_colony_collection.get_neighbors_map.get_cropped_array" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Crop array around label region.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> – Array to crop.</p></li>
+<li><p><strong>label</strong> – Region label.</p></li>
+<li><p><strong>labels</strong> – Array of all region labels.</p></li>
+<li><p><strong>crop_original</strong> – True to crop the original array keeping all labels, False otherwise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cropped array.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 
