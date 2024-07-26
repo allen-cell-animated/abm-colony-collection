@@ -52,6 +52,11 @@ class TestGetDepthMap(unittest.TestCase):
         depth_map = get_depth_map(self.array, self.neighbors_map)
         self.assertDictEqual(expected_depth_map, depth_map)
 
+    def test_get_depth_map_empty_array(self):
+        array = np.zeros((1, 1, 1))
+        depth_map = get_depth_map(array, {})
+        self.assertDictEqual({}, depth_map)
+
     def test_find_edge_ids(self):
         expected_edge_ids = [5, 6, 7, 8]
         edges_ids = find_edge_ids(self.array)

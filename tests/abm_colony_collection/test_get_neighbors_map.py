@@ -36,7 +36,6 @@ class TestGetNeighborsMap(unittest.TestCase):
         self.array = array
 
     def test_get_neighbors_map(self):
-
         expected_neighbors_map = {
             1: {"group": 1, "neighbors": [2, 3, 9]},
             2: {"group": 1, "neighbors": [1, 4, 9]},
@@ -53,6 +52,11 @@ class TestGetNeighborsMap(unittest.TestCase):
         neighbors_map = get_neighbors_map(self.array)
 
         self.assertDictEqual(expected_neighbors_map, neighbors_map)
+
+    def test_get_neighbors_map_empty_array(self):
+        array = np.zeros((1, 1, 1))
+        neighbors_map = get_neighbors_map(array)
+        self.assertDictEqual({}, neighbors_map)
 
     def test_get_cropped_array_no_labels_no_crop_original(self):
         label = 1

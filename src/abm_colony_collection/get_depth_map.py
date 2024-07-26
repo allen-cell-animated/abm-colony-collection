@@ -27,6 +27,10 @@ def get_depth_map(array: np.ndarray, neighbors_map: dict) -> dict:
     depth_map = {cell_id: 0 for cell_id in np.unique(array)}
     depth_map.pop(0, None)
 
+    # Return empty depth map if there are no cell ids in the array
+    if not depth_map:
+        return depth_map
+
     edge_ids = find_edge_ids(array)
     visited = set(edge_ids)
     queue = edge_ids.copy()
