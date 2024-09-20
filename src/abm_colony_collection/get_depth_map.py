@@ -53,7 +53,7 @@ def get_depth_map(array: np.ndarray, neighbors_map: dict) -> dict:
 
 def find_edge_ids(array: np.ndarray) -> list[int]:
     """
-    Gets ids of regions closest to the edge of the array.
+    Get ids of regions closest to the edge of the array.
 
     Parameters
     ----------

@@ -1,4 +1,6 @@
-from typing import Callable, Optional
+from __future__ import annotations
+
+from typing import Callable
 
 import numpy as np
 from scipy import ndimage
@@ -7,7 +9,7 @@ from skimage import measure
 
 def get_neighbors_map(array: np.ndarray) -> dict:
     """
-    Creates map of region ids to lists of neighbors.
+    Create map of region ids to lists of neighbors.
 
     Each region id is also assigned a group number, where all regions in a given
     group are simply connected.
@@ -34,7 +36,7 @@ def get_neighbors_map(array: np.ndarray) -> dict:
     labels, groups = measure.label(mask, connectivity=2, return_num=True)
 
     for group in range(1, groups + 1):
-        group_crop = get_cropped_array(array, group, labels)
+        group_crop = get_cropped_array(array, group, labels, crop_original=False)
         voxel_ids = [i for i in np.unique(group_crop) if i != 0]
 
         # Find neighbors for each voxel id.
@@ -97,7 +99,7 @@ def get_bounding_box(array: np.ndarray) -> tuple[int, int, int, int, int, int]:
 
 
 def get_cropped_array(
-    array: np.ndarray, label: int, labels: Optional[np.ndarray] = None, crop_original: bool = False
+    array: np.ndarray, label: int, labels: np.ndarray | None = None, *, crop_original: bool
 ) -> np.ndarray:
     """
     Crop array around label region.
