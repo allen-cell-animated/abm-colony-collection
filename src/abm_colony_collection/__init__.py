@@ -1,4 +1,4 @@
-"""Tasks for analyzing colony dynamics including neighbors and graph measures."""
+"""Collection of tasks for analyzing colony dynamics."""
 
 from prefect import task
 

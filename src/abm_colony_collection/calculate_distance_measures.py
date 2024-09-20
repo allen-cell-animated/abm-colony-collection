@@ -1,4 +1,4 @@
-from typing import Union
+from __future__ import annotations
 
 import networkx as nx
 import pandas as pd
@@ -23,7 +23,7 @@ def calculate_distance_measures(network: nx.Graph) -> pd.DataFrame:
         Distance measures for each node in the network.
     """
 
-    measures: list[dict[str, Union[int, float]]] = []
+    measures: list[dict[str, int | float]] = []
 
     for component in nx.connected_components(network):
         # Calculate eccentricity for connected subnetwork.
