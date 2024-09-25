@@ -1,3 +1,18 @@
+# [v0.5.0](https://github.com/allen-cell-animated/abm-colony-collection/releases/tag/v0.5.0) - 2024-09-25
+
+> Compare with [v0.4.0](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.4.0...v0.5.0)
+
+### Tests
+
+- Add unit tests for colony collection tasks by [@jessicasyu](https://github.com/jessicasyu) in [#34](https://github.com/allen-cell-animated/abm-colony-collection/pull/34)
+
+### Admin
+
+- Fix release workflow by [@jessicasyu](https://github.com/jessicasyu) in [#31](https://github.com/allen-cell-animated/abm-colony-collection/pull/31)
+- Update workflow action versions and badges by [@jessicasyu](https://github.com/jessicasyu) in [#32](https://github.com/allen-cell-animated/abm-colony-collection/pull/32)
+- Bump dependency versions by [@jessicasyu](https://github.com/jessicasyu) in [#33](https://github.com/allen-cell-animated/abm-colony-collection/pull/33)
+- Add Python 3.11 to workflows and apply ruff linting by [@jessicasyu](https://github.com/jessicasyu) in [#35](https://github.com/allen-cell-animated/abm-colony-collection/pull/35)
+
 # [v0.4.0](https://github.com/allen-cell-animated/abm-colony-collection/releases/tag/v0.4.0) - 2023-08-30
 
 > Compare with [v0.3.4](https://github.com/allen-cell-animated/abm-colony-collection/compare/v0.3.4...v0.4.0)
