@@ -10,7 +10,7 @@ from abm_colony_collection.get_neighbors_map import (
 
 
 class TestGetNeighborsMap(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         array = np.zeros((10, 10, 10))
 
         # Layer does not extend close to edge, so layer is not used to define
